@@ -1,0 +1,55 @@
+{% extends 'dashboard/index.html' %}
+{% block body %}
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane active p-3" id="home" role="tabpanel">
+
+                          <h6 class="">Profile</h6>
+
+
+                      <table class="table table-striped">
+
+                        <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td>
+                                {{request.user.first_name}} {{request.user.last_name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Employee Code</td>
+                            <td>{{request.user.employee_code}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>{{request.user.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>Office Contact</td>
+                            <td>{{request.user.office_contact}}</td>
+                        </tr>
+                        <tr>
+                            <td>Personal Contact</td>
+                            <td>{{request.user.personal_contact}}</td>
+                        </tr>
+                        <tr>
+                            <td>Branch</td>
+                            <td>{{request.user.branch}}</td>
+                        </tr>
+                        <tr>
+                            <td>Location</td>
+                            <td>{{request.user.user_loc}}</td>
+                            <td>{{request.user.role}}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+
+                    </div>
+                   
+{% endblock body%}

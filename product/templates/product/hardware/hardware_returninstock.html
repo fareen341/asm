@@ -1,0 +1,126 @@
+{% load crispy_forms_tags %}
+
+<!-- sample modal content -->
+    <div id="myModalreturn{{hardware.pk}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0" id="myModalLabel">Return Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <h5>Return{{hardware.name}}</h5>
+                    {% comment %} id="HardwareCreateForm" data-category-url="{% url 'ajax_load_assignuserlocation' %}" {% endcomment %}
+                    
+                    <form method="post" id="HardwareReturnForm" data-category-url="{% url 'ajax_load_emplocation' %}" >
+                        {% csrf_token %}
+    
+                             <div class="form-group">
+                                {{form2.branch|as_crispy_field}}
+    
+                            </div>  
+                        <div class="form-group ">
+                            {{form2.location|as_crispy_field}}
+                        </div> 
+                                      
+    
+         
+                         
+                  
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                </div>
+            </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+   
+    {% comment %} {% block javascript %} {% endcomment %}
+
+ <!--script type="text/javascript">
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function () {
+            console.log("function started")
+            $('#id_branch').change(function () {
+                
+                console.log("branch id fetched")
+                const url = $('#HardwareReturnForm');  // get the url of the `load_cities` view
+                console.log("form fetched")
+
+                const branchId = $(this).val();  // get the selected country ID from the HTML input
+
+                console.log("working")
+                $.ajax({                                       // initialize an AJAX request
+                    url: url.attr('data-category-url'),                    // set the url of the request (= /persons/ajax/load-cities/ )
+                    data: {
+
+                        csrfmiddlewaretoken:'{{ csrf_token }}',
+                        'branch_id': branchId       // add the country id to the GET parameters
+                    },
+
+                    success: function (data) {   // `data` is the return of the `load_cities` view function
+                        console.log(data)
+                        $("#id_location").html(data);  // replace the contents of the city input with the data that came from the server
+                        console.log("working")
+                        // {% comment %}                    
+
+                        // let html_data = '<option value="">---------</option>';
+                        // data.forEach(function (city) {
+                        //     html_data += `<option value="${city.id}">${city.name}</option>`
+                        // });
+                        // console.log(html_data);
+                        // $('#id_city').html(html_data); {% endcomment %}
+
+
+                    }
+                });
+
+            });
+        });
+
+    </script-->
+    <script type="text/javascript">
+        // In your Javascript (external .js resource or <script> tag)
+            $(document).ready(function () {
+                
+                $('#id_branch').change(function () {
+                    
+                    const url = $('#HardwareReturnForm');  // get the url of the `load_cities` view
+                        
+                    const branchId = $(this).val();  // get the selected country ID from the HTML input
+                    console.log("working")
+                    $.ajax({                                       // initialize an AJAX request
+                        url: url.attr('data-category-url'),                    // set the url of the request (= /persons/ajax/load-cities/ )
+                        data: {
+                            'branch_id': branchId       // add the country id to the GET parameters
+                        },
+                        
+                        success: function (data) 
+                        {   // `data` is the return of the `load_cities` view function
+                            console.log(data)
+                            $("#id_location").html(data);  // replace the contents of the city input with the data that came from the server
+                            console.log("working")
+                            // {% comment %}                    
+        
+                            // let html_data = '<option value="">---------</option>';
+                            // data.forEach(function (city) {
+                            //     html_data += `<option value="${city.id}">${city.name}</option>`
+                            // });
+                            // console.log(html_data);
+                            // $('#id_city').html(html_data); {% endcomment %}
+        
+                            
+                        }
+                    });
+        
+                });
+        });
+        
+            
+        </script>
+    </body>
+
+    {% comment %} {% endblock javascript %} {% endcomment %}

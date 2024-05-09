@@ -1,0 +1,77 @@
+{% extends 'dashboard/index.html' %}
+{% load crispy_forms_tags %}
+{% block title_add %}
+                        <!-- start page title -->
+                        <div class="row align-items-center">
+                          <div class="col-sm-6">
+                              <div class="page-title-box">
+                                  <h4 class="font-size-18">Add Software </h4>
+                                  <ol class="breadcrumb mb-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Product</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'SoftwareList' %}">Software</a></li>
+                                    <li class="breadcrumb-item active">Add Software </li>
+                                  </ol>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+
+                            <button onclick="history.back()" type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Back</button>
+                      </div>     
+                    </div>     
+                      <!-- end page title -->
+
+{% endblock title_add %}
+{% block body %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="mt-0 header-title"></h4>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="form-row">
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.name|as_crispy_field}}
+
+                        </div>
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.softwaretype|as_crispy_field}}
+
+                        </div>
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.installed_on|as_crispy_field}}
+
+                        </div>
+                        
+                        <div class="form-group col-md-3 mb-0">
+                            <label class=" requiredField">
+                                Purchased on<span class="asteriskField">*</span>
+                            </label>
+                            {{form.purchased_on |as_crispy_field}}
+
+                        </div>
+                        <div class="form-group col-md-3 mb-0">
+                            <label class=" requiredField">
+                                Valid Till<span class="asteriskField">*</span>
+                            </label>
+                            {{form.expiry|as_crispy_field}}
+                    </div>
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary">Submit</button>
+                </form>
+                {% comment %} {{form.errors}} {% endcomment %}
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+// In your Javascript (external .js resource or <script> tag)
+    $(document).ready(function() {
+        $('#id_softwaretype').select2();
+    });
+
+</script>
+{% endblock body %}

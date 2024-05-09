@@ -1,0 +1,177 @@
+{% load crispy_forms_tags %}
+
+<!-- sample modal content -->
+    <div id="myModalnonit{{hardware.pk}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0" id="myModalLabel">Assign Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <h5>Assign {{hardware.name}}</h5>
+                    {% comment %} id="HardwareCreateForm" data-category-url="{% url 'ajax_load_assignuserlocation' %}" {% endcomment %}
+                    
+                    <form method="post" name='assign' id="NonITAssetAssignForm" data-category-url="{% url 'ajax_load_assignuserlocation' %}" >
+                        {% csrf_token %}
+    
+                        {% comment %} <div class="form-row">
+                            <div class="form-group">
+                                {{form.name|as_crispy_field }}
+    
+                            </div>
+                            <div class="form-group">
+                                {{form.brand|as_crispy_field}}
+    
+                            </div>  
+                            <div class="form-group">
+                                {{form.category|as_crispy_field}}
+    
+                            </div>
+    
+                            <div class="form-group">
+                                {{form.subcategory|as_crispy_field}}
+    
+                            </div>
+                            <div class="form-group">
+                                {{form.barcode|as_crispy_field}}
+    
+                            </div>
+    
+                            <div class="form-group">
+                                {{form.serial|as_crispy_field}}
+    
+                            </div>
+    
+                           <div class="form-group">
+                                {{form.vendor|as_crispy_field}}
+    
+                            </div> 
+    
+                            <div class="form-group">
+                                {{form.purchased_on|as_crispy_field}}
+    
+                            </div>
+    
+                            <div class="form-group">
+                                {{form.warranty_expiry|as_crispy_field}}
+    
+                            </div>
+    
+                            <div class="form-group">
+                                {{form.tpm_expiry|as_crispy_field}}
+                        </div>
+                        <div class="form-group">
+                            {{form.status|as_crispy_field}}
+    
+                        </div> 
+                             {% endcomment %}
+                        {% comment %} <div class="form-group">
+                                {{form.branch|as_crispy_field}}
+    
+                        </div>   {% endcomment %}
+                        <div class="form-group col-6">
+                            {{form.assigned_to|as_crispy_field}}
+                        </div>
+                        
+                        <div class="form-group col-6">
+                            {{form.location|as_crispy_field}}
+                        </div> 
+                                      
+    
+         
+                        
+                        
+                        {% comment %} <button type="submit" class="btn btn-outline-primary">Submit</button> {% endcomment %}
+                  
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                </div>
+            </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!--script type="text/javascript">
+// In your Javascript (external .js resource or <script> tag)
+    $(document).change(function () {
+        
+        $('#id_assigned_to').change(function () {
+            
+            const url = $('#HardwareCreateForm');  // get the url of the `load_cities` view
+            
+
+            const UserId = $(this).val();  // get the selected country ID from the HTML input
+            
+           
+            $.ajax({                                       // initialize an AJAX request
+                url: url.attr('data-category-url'),                    // set the url of the request (= /persons/ajax/load-cities/ )
+                data: {
+                    'id_assigned_to': UserId       // add the country id to the GET parameters
+                },
+                
+                success: function (data) 
+                {   // `data` is the return of the `load_cities` view function
+                
+                    $("#id_location").html(data);  // replace the contents of the city input with the data that came from the server
+                    
+                    // {% comment %}                    
+
+                    // let html_data = '<option value=""></option>';
+                    // data.forEach(function (city) {
+                    //     html_data += `<option value="${city.id}">${city.name}</option>`
+                    // });
+                    // console.log(html_data);
+                    // $('#id_city').html(html_data); {% endcomment %}
+
+                    
+                }
+            });
+
+        });
+});
+
+</script-->
+
+
+<script type="text/javascript">
+    // In your Javascript (external .js resource or <script> tag)
+    $(document).ready(function () {
+
+        $('#id_assigned_to').change(function () {
+
+            const url = $('#HardwareAssignForm');  // get the url of the `load_cities` view
+
+
+            const locationId = $(this).val();  // get the selected country ID from the HTML input
+
+            console.log("working")
+            $.ajax({                                       // initialize an AJAX request
+                url: url.attr('data-category-url'),                    // set the url of the request (= /persons/ajax/load-cities/ )
+                data: {
+                    'userlocation_id': locationId       // add the country id to the GET parameters
+                },
+
+                success: function (data) {   // `data` is the return of the `load_cities` view function
+                    console.log("working")
+                    $("#id_location").html(data);  // replace the contents of the city input with the data that came from the server
+                    console.log("working")
+                    // {% comment %}                    
+
+                    // let html_data = '<option value="">---------</option>';
+                    // data.forEach(function (city) {
+                    //     html_data += `<option value="${city.id}">${city.name}</option>`
+                    // });
+                    // console.log(html_data);
+                    // $('#id_city').html(html_data); {% endcomment %}
+
+
+                }
+            });
+
+        });
+    });
+
+</script>

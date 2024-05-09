@@ -1,0 +1,80 @@
+{% extends 'dashboard/index.html' %}
+{% block title_add %}
+                        <!-- start page title -->
+                        <div class="row align-items-center">
+                          <div class="col-sm-6">
+                              <div class="page-title-box">
+                                  <h4 class="font-size-18">Category List</h4>
+                                  <ol class="breadcrumb mb-0">
+                                      <li class="breadcrumb-item"><a href="javascript: void(0);">Category</a></li>
+                                      <li class="breadcrumb-item active">Category List</li>
+                                  </ol>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+
+                          <a href="{% url 'CategoryCreate' %}">
+                            <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Add Category </button>
+                            </a>
+                      </div>     
+                    </div>     
+                      <!-- end page title -->
+
+{% endblock title_add %}
+{% block body %}
+
+<div class="row">
+    <div class="col-12">
+        {% for message in messages %}
+        <div class="alert  alert-outline-success text-gradient-success mb-0" role="alert">
+            <strong>{{message}}</strong>
+        </div>  
+        {% endfor %}
+        <div class="card">
+
+            <div class="card-body">
+
+                <table id="colvis" class="table table-striped" >
+                    
+                    <thead>
+                    <tr>
+                        <th>Sr No</th>
+                        <th>Category</th>
+                        <th>Asset Type</th>
+                        {% comment %} <th>Action</th> {% endcomment %}
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+                        {% for category in category  %}
+                    <tr>
+                        <td><a href="{% url 'CategoryUpdate' category.pk %}">{{category.pk}}</a></td>
+                        <td><a href="{% url 'CategoryUpdate' category.pk %}">{{category.category}}</a></td>
+                        <td>{{category.asset_type}}</td>
+                        {% comment %} <td>
+                            <a href="{% url 'CategoryUpdate' category.pk %}">
+                                <button
+                                  class="btn btn-success"
+                                  type="button"
+                                  aria-haspopup="true"
+                                  aria-expanded="false"
+                                >
+                                  Edit
+                                </button>
+                              </a>
+                            
+                           </td> {% endcomment %}
+
+                        
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+{% endblock body %}

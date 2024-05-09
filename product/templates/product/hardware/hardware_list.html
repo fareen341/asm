@@ -1,0 +1,125 @@
+{% extends 'dashboard/index.html' %}
+{% block title_add %}
+<!-- start page title -->
+<div class="row align-items-center">
+  <div class="col-sm-6">
+    <div class="page-title-box">
+      <h4 class="font-size-18">Hardware Product List</h4>
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="javascript: void(0);">Product</a></li>
+        <li class="breadcrumb-item"><a href="javascript: void(0);">Hardware</a></li>
+        <li class="breadcrumb-item active">Hardware Product List</li>
+      </ol>
+    </div>
+  </div>
+  <div class="col-sm-6">
+
+    <a href="{% url 'HardwareCreate' %}">
+      <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Add Hardware Product </button>
+    </a>
+  </div>
+</div>
+<!-- end page title -->
+
+{% endblock title_add %}
+{% block body %}
+<div class="table-responsive col-12">
+  <!--table id="datatable-buttons" class="table table-bordered nowrap">
+    <thead>
+      <tr>
+        <th>Name</th>
+        {% comment %} <th>Brand</th> {% endcomment %}
+        <th>Category</th>
+        <th>Subcategory</th>
+        <th>Barcode</th>
+        <th>Serial</th>
+        <th>Vendor</th>
+        <th>Purchased On</th>
+        <th>Warranty Expiry</th>
+        <th>Warranty Status</th>
+        <th>TPM Expiry</th>
+        <th>Status</th>
+        <th>Location</th>
+        <th>Assigned To</th>
+        <th>Action</th>
+      </tr>
+    </thead-->
+
+    <div class="row">
+      <div class="col-12">
+        {% for message in messages %}
+        <div class="alert alert-outline-success text-gradient-success mb-0" role="alert">
+          <strong>{{message}}</strong>
+        </div>
+        {% endfor %}
+
+        <table id="example" class="table table-striped" >
+
+          <thead>
+            <tr>
+              <th>Name</th>
+              {% comment %} <th>Brand</th> {% endcomment %}
+              <th>Category</th>
+             
+              <th>Barcode</th>
+              <th>Serial</th>
+              <th>Assigned To</th>
+              <th>Status</th>
+              <th>Vendor</th>
+              <th>Purchased On</th>
+              <th>Warranty Expiry</th>
+              <th>Warranty Status</th>
+              <th>TPM Expiry</th>
+              <th>Branch</th>
+              <th>Location</th>
+              <th>Cost</th>
+
+              {% comment %} <th>Action</th> {% endcomment %}
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for hardware in hardware %}
+            <tr>
+              <td><a href="{% url 'HardwareDetail' hardware.pk %}">{{hardware.name }}</a></td>
+              {% comment %} <td>{{hardware.brand }}</td> {% endcomment %}
+              <td>{{hardware.category }}</td>
+              
+              <td>{{hardware.barcode }}</td>
+              <td>{{hardware.serial }}</td>
+              <td>{{hardware.assigned_to }}</td>
+              <td>
+                <span class="badge badge-{% if hardware.status == "working" %}success {% else %}badge badge-danger 
+                {% endif %}"> {{hardware.status }}
+                </span>
+              </td>
+              <td>{{hardware.vendor }}</td>
+              <td>{{hardware.purchased_on }}</td>
+              <td>{{hardware.warranty_expiry }}</td>
+              <td>Valid till:{{hardware.warranty_expiry | timeuntil}}</td>
+              <td>{{hardware.tpm_expiry }}</td>
+
+              <td>{{hardware.branch }}</td>
+              <td>{{hardware.location }}</td>
+              <td>{{hardware.cost }}</td>
+
+              {% comment %} <td>
+
+                <button type="button" class="btn btn-sm btn-success">Edit</button>
+
+
+                <button type="button" class="btn btn-sm btn-info">View</button>
+                </a>
+              </td> {% endcomment %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+<!-- end col -->
+</div>
+<!-- end row -->
+</div>
+{% endblock body %}

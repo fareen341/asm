@@ -1,0 +1,111 @@
+{% extends 'dashboard/index.html' %}
+{% block body %}
+
+<div class="row">
+    <div class="col-xl-3 col-md-6">
+        <div class="card mini-stat bg-warning text-black">
+            <div class="card-body">
+                <div class="mb-4">
+                    <h5 class="font-size-16 text-uppercase mt-0 text-black-50">Total IT Assets</h5>
+                    <h4 class="font-weight-medium font-size-24">{{it_asset_count}}</h4>
+                </div>
+            </div>
+        </div>
+    </div><div class="col-xl-3 col-md-6">
+        <div class="card mini-stat bg-warning text-black">
+            <div class="card-body">
+                <div class="mb-4">
+                    <h5 class="font-size-16 text-uppercase mt-0 text-black-50">Total Non IT Asset</h5>
+                    <h4 class="font-weight-medium font-size-24">{{non_it_asset_count}} </h4>
+                </div>
+            </div>
+        </div>
+    </div><div class="col-xl-3 col-md-6">
+        <div class="card mini-stat bg-warning text-black">
+            <div class="card-body">
+                <div class="mb-4">
+                    <h5 class="font-size-16 text-uppercase mt-0 text-black-50">Total Software</h5>
+                    <h4 class="font-weight-medium font-size-24">{{software_count}}</h4>
+                </div>
+            </div>
+        </div>
+    </div><div class="col-xl-3 col-md-6">
+        <div class="card mini-stat bg-warning text-black">
+            <div class="card-body">
+                <div class="mb-4">
+                    <h5 class="font-size-16 text-uppercase mt-0 text-black-50">Total Employee</h5>
+                    <h4 class="font-weight-medium font-size-24">{{employee_count}} </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+
+<div class="row">
+    <div class="col-8">
+        <canvas id="myChart" style="height:400px"></canvas>
+      </div>
+      <div class="col-4">
+        <div class="card mini-stat bg-dark text-white">
+            <div class="card-body">
+                <div class="mb-4">
+                    <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Total Assigned Assets</h5>
+                    <h4 class="font-weight-medium font-size-24">{{assign_count}} </h4>
+                </div>
+            </div>
+        </div>
+        <div class="card mini-stat bg-info text-white">
+            <div class="card-body">
+                <div class="mb-4">
+                    <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Assets In Stock</h5>
+                    <h4 class="font-weight-medium font-size-24">{{in_stock_count}} </h4>
+                </div>
+            </div>
+        </div>
+        <div class="card mini-stat bg-success text-white">
+            <div class="card-body">
+                <div class="mb-4">
+                    <h5 class="font-size-16 text-uppercase mt-0 text-white-70">Total Working Assets</h5>
+                    <h4 class="font-weight-medium font-size-24">{{working_count}} </h4>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+
+<div class="row">
+    <div class="col-6">
+        <canvas id="bargraph" style="height:500px" ></canvas>
+    </div>
+    <div class="col-6">
+        <canvas id="softbargraph" style="height:500px" ></canvas>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <canvas id="itbar" style="height:500px" ></canvas>
+    </div>
+    <div class="col-6">
+        <canvas id="nonitbar" style="height:500px" ></canvas>
+    </div>
+</div>
+
+
+{% comment %} {% for data in year %}{{data}},{% endfor %} {% endcomment %}
+{% comment %} {% for data in count  %}{{data}},{% endfor %} {% endcomment %}
+{% comment %} {{count}} {% endcomment %}
+{% comment %} {{count}} {% endcomment %}
+{% comment %} 
+{% for data in it_asset_cat %}{{data}},{% endfor %}
+{% for data in it_asset_cat_count %}{{data}},{% endfor %} {% endcomment %}
+
+{% comment %} {{year}} {% endcomment %}
+
+{% include  'dashboard/chart.html' %}
+
+
+
+{% endblock body %}

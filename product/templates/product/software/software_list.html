@@ -1,0 +1,80 @@
+
+{% extends 'dashboard/index.html' %}
+{% block title_add %}
+                        <!-- start page title -->
+                        <div class="row align-items-center">
+                          <div class="col-sm-6">
+                              <div class="page-title-box">
+                                  <h4 class="font-size-18">Software List</h4>
+                                  <ol class="breadcrumb mb-0">
+                                      <li class="breadcrumb-item"><a href="javascript: void(0);">Product</a></li>
+                                      <li class="breadcrumb-item"><a href="javascript: void(0);">Software</a></li>
+                                      <li class="breadcrumb-item active">Software List</li>
+                                  </ol>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+
+                          <a href="{% url 'SoftwareCreate' %}">
+                            <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Add Software </button>
+                            </a>
+                      </div>     
+                    </div>     
+                      <!-- end page title -->
+
+{% endblock title_add %}
+{% block body %}
+
+<div class="row">
+    <div class="col-12">
+        {% for message in messages %}
+        <div class="alert  alert-outline-success text-gradient-success mb-0" role="alert">
+            <strong>{{message}}</strong>
+        </div>  
+        {% endfor %}
+        <div class="card">
+
+            <div class="card-body">
+                <div class = " col-md-2 mb-2 ml-auto">
+                <a href="{% url 'SoftwareCreate' %}"><button type="button" class=" btn btn-outline-purple btn-lg btn-block">Add Software</button>
+                </a></div>
+
+                <table id="software" class="table table-striped" >
+                    
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Software Type</th>
+                        <th>Purchased On</th>
+                        <th>Expiry</th>
+                        <th>Installed on</th>
+                        {% comment %} <th>Action</th> {% endcomment %}
+                        
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+                        {% for software in software  %}
+                    <tr>
+                        <td><a href="{% url 'SoftwareUpdate' software.pk %}">{{software.name}}</a></td>
+                        <td>{{software.softwaretype}}</td>
+                        <td>{{software.purchased_on}}</td>
+                        <td>{{software.expiry}}</td>
+                        <td>{{software.installed_on}}</td>
+                        {% comment %} <td> 
+                            <a href="{% url 'SoftwareUpdate' software.pk %}">       
+                                <button type="button" class="btn btn-sm btn-success">Edit</button>
+                              </a>
+                        </td> {% endcomment %}
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+{% endblock body %}

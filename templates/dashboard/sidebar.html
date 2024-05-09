@@ -1,0 +1,174 @@
+<div id="sidebar-menu">
+    <!-- Left Menu Start -->
+    <ul class="metismenu list-unstyled" id="side-menu">
+        <li class="menu-title">Main</li>
+
+        <li>
+            <a href="{% url 'Dashboard' %}" class="waves-effect">
+                <i class="ti-home"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+{% comment %} Employee Menu {% endcomment %}
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="far fa-user"></i>
+                <span>Employee</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="true">
+                <li><a href="{% url 'UserList' %}">Employee List</a></li>
+                <li><a href="{% url 'UserCreate' %}">Add Employee</a></li>
+                
+            </ul>
+        </li>
+{% comment %} Employee Menu End {% endcomment %}
+
+
+
+
+{% comment %} Assets Menu {% endcomment %}
+<li>
+    <a href="javascript: void(0);" class="has-arrow waves-effect">
+        <i class="fas fa-laptop"></i>
+        <span>IT Assets </span>
+    </a>
+    <ul class="sub-menu" aria-expanded="true">
+        <li><a href="{% url 'HardwareList' %}">IT Assets List</a></li>
+        <li><a href="{% url 'HardwareCreate' %}">Add IT Asset</a></li>
+    </ul>
+</li>
+{% comment %} Assets Menu End {% endcomment %}
+
+
+{% comment %} Assets Menu {% endcomment %}
+<li>
+    <a href="javascript: void(0);" class="has-arrow waves-effect">
+        <i class="fas fa-print"></i>
+        <span>Non-IT Assets </span>
+    </a>
+    <ul class="sub-menu" aria-expanded="true">
+        <li><a href="{% url 'NonITAssetList' %}">Non-IT Assets List</a></li>
+        <li><a href="{% url 'NonITAssetCreate' %}">Add Non-IT Asset</a></li>
+    </ul>
+</li>
+{% comment %} Assets Menu End {% endcomment %}
+
+
+{% comment %} Assets Menu {% endcomment %}
+<li>
+    <a href="javascript: void(0);" class="has-arrow waves-effect">
+        <i class="fab fa-windows"></i>
+        <span>Software </span>
+    </a>
+    <ul class="sub-menu" aria-expanded="true">
+        <li><a href="{% url 'SoftwareList' %}">Software List</a></li>
+        <li><a href="{% url 'SoftwareCreate' %}">Add Software</a></li>
+    </ul>
+</li>
+{% comment %} Assets Menu End {% endcomment %}
+
+
+
+
+
+
+
+{% comment %} Assets Menu 
+<li>
+    <a href="javascript: void(0);" class="has-arrow waves-effect">
+        <i class="fas fa-laptop"></i>
+        <span>Old Assets </span>
+    </a>
+    <ul class="sub-menu" aria-expanded="true">
+        <li><a href="{% url 'AssignAsset' %}">Assigned Assets </a></li>
+        <li><a href="{% url 'UnAssignAsset' %}">Assets In Stock</a></li>
+    </ul>
+</li>
+ Assets Menu End {% endcomment %}
+
+
+{% comment %} Product Menu 
+<li>
+    <a href="javascript: void(0);" class="has-arrow waves-effect">
+        <i class="fas fa-cart-plus"></i>
+        <span>Product</span>
+    </a>
+    <ul class="sub-menu" aria-expanded="true">
+        <li><a href="javascript: void(0);" class="has-arrow">Hardware</a>
+            <ul class="sub-menu" aria-expanded="true">
+                <li><a href="{% url 'HardwareList' %}">Hardware List </a></li>
+                <li><a href="#">Hardware List </a></li>
+                <li><a href="{% url 'HardwareCreate' %}"> Add Hardware</a></li>
+            </ul>
+        </li>
+        <li><a href="javascript: void(0);" class="has-arrow">Software</a>
+            <ul class="sub-menu" aria-expanded="true">
+                <li><a href="{% url 'SoftwareList' %}">Software List</a></li>
+                <li><a href="{% url 'SoftwareCreate' %}">Add Software</a></li>
+            </ul>
+        </li>
+    </ul>
+</li>
+Product Menu End {% endcomment %}
+
+
+{% comment %} Vendor Menu {% endcomment %}
+<li>
+    <a href="javascript: void(0);" class="has-arrow waves-effect">
+        <i class="fas fa-address-book"></i>
+        <span>Vendor </span>
+    </a>
+    <ul class="sub-menu" aria-expanded="true">
+        <li><a href="{% url 'VendorList' %}">Vendor List</a></li>
+        <li><a href="{% url 'VendorCreate' %}">Add Vendor</a></li>
+        
+    </ul>
+</li>
+{% comment %} Vendor Menu End {% endcomment %}
+
+
+{% comment %} Master Menu {% endcomment %}
+<li>
+    <a href="javascript: void(0);" class="has-arrow waves-effect">
+        <i class="fas fa-check-square"></i>
+        <span>Master</span>
+    </a>
+    <ul class="sub-menu" aria-expanded="true">
+        <li><a href="javascript: void(0);" class="has-arrow">Company Master</a>
+            <ul class="sub-menu" aria-expanded="true">
+                <li><a href="{% url 'BranchList' %}">Branch </a></li>
+                <li><a href="{% url 'EmployeeLocationList' %}">  Location </a></li>
+            </ul>
+        </li>
+        <li><a href="javascript: void(0);" class="has-arrow">Product Master </a>
+            <ul class="sub-menu" aria-expanded="true">
+                <li><a href="{% url 'CategoryList' %}">Category </a></li>
+                {% comment %} <li><a href="#">Sub Category </a></li> {% endcomment %}
+                <li><a href="{% url 'SoftwareTypeList' %}">Software Type </a></li>
+                {% comment %} <li><a href="#">Product Location </a></li> {% endcomment %}
+                <li><a href="{% url 'BrandList' %}">Brand </a></li>
+            </ul>
+        </li>
+    </ul>
+</li>
+{% comment %} Master Menu End {% endcomment %}
+
+{% comment %} Reports Menu {% endcomment %}
+<li>
+    <a href="javascript: void(0);" class="has-arrow waves-effect">
+        <i class="fas fa-check-triangle"></i>
+        <span>Reports</span>
+    </a>
+    <ul class="sub-menu" aria-expanded="true">
+        <li><a href="{% url 'AssignedAssetReport' %}" >Assigned Assets</a></li>
+        <li><a href="{% url 'UnAssignedAssetReport' %}">UnAssigned Assets</a></li>
+        <li><a href="{% url 'DisposedAsset' %}">Disposed Asset</a></li>
+        <li><a href="{% url 'SoftwareInUse' %}">Software In Use </a></li>
+        <li><a href="{% url 'SoftwareInStock' %}">Software In Stock</a></li>
+    </ul>
+</li>
+{% comment %} Reports Menu End {% endcomment %}
+
+    </ul>
+</div>

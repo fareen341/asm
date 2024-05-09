@@ -1,0 +1,82 @@
+{% extends 'dashboard/index.html' %} {% block title_add %}
+<!-- start page title -->
+<div class="row align-items-center">
+  <div class="col-sm-6">
+    <div class="page-title-box">
+      <h4 class="font-size-18">Product Location List</h4>
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item">
+          <a href="javascript: void(0);">Product Location</a>
+        </li>
+        <li class="breadcrumb-item active">Product Location List</li>
+      </ol>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <a href="{% url 'AssetLocationCreate' %}">
+      <button type="button" class="btn btn-primary w-lg mt-4 mr-4 float-right">
+        Add Product Location
+      </button>
+    </a>
+  </div>
+</div>
+<!-- end page title -->
+
+{% endblock title_add %} {% block body %}
+
+<div class="row">
+  <div class="col-12">
+    {% for message in messages %}
+    <div
+      class="alert alert-outline-success text-gradient-success mb-0"
+      role="alert"
+    >
+      <strong>{{message}}</strong>
+    </div>
+    {% endfor %}
+    <div class="card">
+      <div class="card-body">
+        <table
+          id="datatable-buttons"
+          class="table table-bordered dt-responsive nowrap"
+          style="border-collapse: collapse; border-spacing: 0; width: 100%"
+        >
+          <thead>
+            <tr>
+              <th>Branch</th>
+              <th>Location Type</th>
+              <th>Location</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for a_location in a_location %}
+            <tr>
+              <td>{{a_location.branch}}</td>
+              <td>{{a_location.location_type}}</td>
+              <td>{{a_location.location}}</td>
+              <td>
+                <a href="{% url 'AssetLocationUpdate' a_location.pk  %}">
+                  <button
+                    class="btn btn-success"
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Edit
+                  </button>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- end col -->
+</div>
+<!-- end row -->
+
+{% endblock body %}

@@ -1,0 +1,82 @@
+{% extends 'dashboard/index.html' %} {% block title_add %}
+<!-- start page title -->
+<div class="row align-items-center">
+  <div class="col-sm-6">
+    <div class="page-title-box">
+      <h4 class="font-size-18"> Location List</h4>
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item">
+          <a href="{% url 'EmployeeLocationCreate' %}">Location</a>
+        </li>
+        <li class="breadcrumb-item active"> Location List</li>
+      </ol>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <a href="{% url 'EmployeeLocationCreate' %}">
+      <button type="button" class="btn btn-primary w-lg mt-4 mr-4 float-right">
+        Add  Location
+      </button>
+    </a>
+  </div>
+</div>
+<!-- end page title -->
+
+{% endblock title_add %} {% block body %}
+
+<div class="row">
+  <div class="col-12">
+    {% for message in messages %}
+    <div
+      class="alert alert-outline-success text-gradient-success mb-0"
+      role="alert"
+    >
+      <strong>{{message}}</strong>
+    </div>
+    {% endfor %}
+    <div class="card">
+      <div class="card-body">
+        <table
+          id="colvis"
+          class="table table-striped" 
+        >
+          <thead>
+            <tr>
+              <th>Branch</th>
+              <th>Location Type</th>
+              <th>Location</th>
+              {% comment %} <th>Edit</th> {% endcomment %}
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for e_location in e_location %}
+            <tr>
+              <td><a href="{% url 'E_locationUpdate' e_location.pk %}">{{e_location.branch}}</a></td>
+
+              <td>{{e_location.location_type}}</td>
+              <td>{{e_location.location}}</td>
+              {% comment %} <td>
+                <a href="{% url 'E_locationUpdate' e_location.pk %}">
+                  <button
+                    class="btn btn-success"
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Edit
+                  </button>
+                </a>
+              </td> {% endcomment %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- end col -->
+</div>
+<!-- end row -->
+
+{% endblock body %}

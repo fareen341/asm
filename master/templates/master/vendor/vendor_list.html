@@ -1,0 +1,83 @@
+{% extends 'dashboard/index.html' %} {% block title_add %}
+<!-- start page title -->
+<div class="row align-items-center">
+  <div class="col-sm-6">
+    <div class="page-title-box">
+      <h4 class="font-size-18">Vendor List</h4>
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item">
+          <a href="javascript: void(0);">Vendor</a>
+        </li>
+        <li class="breadcrumb-item active">Vendor List</li>
+      </ol>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <a href="{% url 'VendorCreate' %}">
+      <button type="button" class="btn btn-primary w-lg mt-4 mr-4 float-right">
+        Add Vendor
+      </button>
+    </a>
+  </div>
+</div>
+<!-- end page title -->
+
+{% endblock title_add %} {% block body %}
+
+<div class="row">
+  <div class="col-12">
+     {% for message in messages %}
+    <div class="alert alert-outline-success text-gradient-success mb-0" role="alert">
+      <strong>{{message}}</strong>
+    </div>
+    {% endfor %}
+   
+
+        <table
+          id="vendor"
+          class="table table-striped" 
+        >
+          <thead>
+            <tr>
+              <th>Vendor Name</th>
+              <th>Vendor Number</th>
+              <th>Office Contact</th>
+              <th>Email</th>
+              <th>Website</th>
+              <th>Address</th>
+              <th>Contact Person Name</th>
+              <th>Point Of Contact</th>
+              {% comment %} <th>Action</th> {% endcomment %}
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for vendor in vendor %}
+            <tr>
+              <td> <a href="{% url 'VendorUpdate' vendor.pk  %}">{{vendor.vendor_name | title}}</a></td>
+              <td>{{vendor.vendor_code}}</td>
+              <td>{{vendor.vendor_contact}}</td>
+              <td>{{vendor.vendor_email}}</td>
+              <td>{{vendor.vendor_website}}</td>
+              <td>{{vendor.vendor_address}}</td>
+              <td>{{vendor.vendor_contact_person}}</td>
+              <td>{{vendor.vendor_contact_person_contact}}</td>
+              {% comment %} <td>
+                <a href="{% url 'VendorUpdate' vendor.pk  %}">
+                  <button class="btn btn-success" type="button" aria-haspopup="true" aria-expanded="false">
+                    Edit
+                  </button>
+                </a>
+              </td> {% endcomment %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      
+    </div>
+  </div>
+  <!-- end col -->
+</div>
+<!-- end row -->
+
+{% endblock body %}

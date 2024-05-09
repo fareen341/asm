@@ -1,0 +1,73 @@
+{% extends 'dashboard/index.html' %}
+{% block title_add %}
+                        <!-- start page title -->
+                        <div class="row align-items-center">
+                          <div class="col-sm-6">
+                              <div class="page-title-box">
+                                  <h4 class="font-size-18">Company List</h4>
+                                  <ol class="breadcrumb mb-0">
+                                      <li class="breadcrumb-item"><a href="javascript: void(0);">Company</a></li>
+                                      <li class="breadcrumb-item active">Company List</li>
+                                  </ol>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+
+                          <a href="{% url 'CompanyCreate' %}">
+                            <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Add Company </button>
+                            </a>
+                      </div>     
+                    </div>     
+                      <!-- end page title -->
+
+{% endblock title_add %}
+{% block body %}
+
+<div class="row">
+    <div class="col-12">
+        {% for message in messages %}
+        <div class="alert  alert-outline-success text-gradient-success mb-0" role="alert">
+            <strong>{{message}}</strong>
+        </div>  
+        {% endfor %}
+        <div class="card">
+
+            <div class="card-body">
+                <div class = " col-md-2 mb-2 ml-auto">
+                <a href="{% url 'CompanyCreate' %}"><button type="button" class=" btn btn-outline-purple btn-lg btn-block">Create Company Master</button>
+                </a></div>
+
+                <table id="colvis" class="table table-striped" >
+                    
+                    <thead>
+                    <tr>
+                        <th>company_name</th>
+                        <th>address</th>
+                        <th>contact</th>
+                        <th>Action</th>
+                        
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+                        {% for comp in company  %}
+                    <tr>
+                        <td>{{comp.company_name}}</td>
+                        <td>{{comp.address}}</td>
+                        <td>{{comp.contact}}</td>
+                        <td> <a href="{% url 'CompanyUpdate' comp.pk %}"><button class = "btn btn-outline-purple btn-lg btn-block">
+                            edit</button></a></td>
+
+                        
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+{% endblock body %}

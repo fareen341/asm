@@ -1,0 +1,139 @@
+
+{% extends 'dashboard/index.html' %}
+{% block title_add %}
+                        <!-- start page title -->
+                        <div class="row align-items-center">
+                          <div class="col-sm-6">
+                              <div class="page-title-box">
+                                  <h4 class="font-size-18">Assets In Stock</h4>
+                                  <ol class="breadcrumb mb-0">
+                                      <li class="breadcrumb-item"><a href="javascript: void(0);">Asset</a></li>
+                                      <li class="breadcrumb-item active">Assets In Stock</li>
+                                  </ol>
+                              </div>
+                          </div>
+                          
+                    </div>     
+                      <!-- end page title -->
+
+{% endblock title_add %}
+ {% block body %}
+
+<div class="table-responsive col-12">
+  <div class="col-12">
+
+    <div class="card">
+      <div class="card-body">
+        {% comment %}
+        <div class="col-md-2 mb-2 ml-auto">
+          <a href="{% url 'HardwareCreate' %}"
+            ><button
+              type="button"
+              class="btn btn-outline-purple btn-lg btn-block"
+            >
+              Add Hardware
+            </button>
+          </a>
+        </div>
+        {% endcomment %}
+
+        <table
+          id="datatable-buttons"
+          class="table table-bordered nowrap"
+
+        >
+          <thead>
+            <tr>
+              <th>Name</th>
+              {% comment %} <th>Brand</th> {% endcomment %}
+              {% comment %}
+              <th>Category</th>
+              {% endcomment %}
+              <th>Subcategory</th>
+              <th>Barcode</th>
+              <th>Serial</th>
+              {% comment %}
+              <th>Vendor</th>
+              {% endcomment %}
+              <th>Purchased On</th>
+              <th>Warranty Expiry</th>
+              <th>Warranty Status</th>
+              <th>TPM Expiry</th>
+              <th>Status</th>
+              <th>Location</th>
+              <th>Assigned To</th>
+              {% comment %} <th>Action</th> {% endcomment %}
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for hardware in hardware %}
+            <tr>
+              <td>{{hardware.name }}</td>
+              {% comment %} <td>{{hardware.brand }}</td> {% endcomment %}
+              {% comment %}
+              <td>{{hardware.category }}</td>
+              {% endcomment %}
+              <td>{{hardware.subcategory }}</td>
+              <td>{{hardware.barcode }}</td>
+              <td>{{hardware.serial }}</td>
+              {% comment %}
+              <td>{{hardware.vendor }}</td>
+              {% endcomment %}
+              <td>{{hardware.purchased_on }}</td>
+              <td>{{hardware.warranty_expiry }}</td>
+
+              {% comment %}
+              <td>
+                Valid till: {{hardware.years}}, {{hardware.months}} months,
+                {{harware.days}} days.
+              </td>
+              {% endcomment %}
+              {% comment %} {% if hardware.warranty_expiry.day -  < 365 %} {% endcomment %}
+              <td>Valid till: {{hardware.warranty_expiry | timeuntil}}</td>
+              {% comment %} {% endif %} {% endcomment %}
+              <td>{{hardware.tpm_expiry }}</td>
+              
+              <td>
+                <span class="badge badge-{% if hardware.status == "working" %}success {% else %}badge badge-danger {% endif %}"> {{hardware.status }}</span>
+              </td>
+             
+              <td>{{hardware.location }}</td>
+              <td>{{hardware.assigned_to }}</td>
+              {% comment %} <td>
+                <a href="{% url 'HardwareUpdate' hardware.pk %}"
+                  ><button class="btn btn-outline-purple btn-lg btn-block">
+                    edit
+                  </button></a
+                >
+              </td> {% endcomment %}
+
+              {% comment %}
+              <td>
+                <a href="{% url 'UserUpdate' software.pk %}"
+                  ><button class="btn btn-outline-purple btn-lg btn-block">
+                    edit
+                  </button></a
+                >
+              </td>
+              {% endcomment %}
+              {% comment %} <td>                                                       
+                <a href="{% url 'HardwareAssign' hardware.pk %}"> 
+                    <button type="button" class="btn btn-sm btn-success">Assign</button>
+                </a>
+                <a href="{% url 'HardwareDetail' hardware.pk %}">
+                  <button type="button" class="btn btn-sm btn-info">View</button>
+              </a>
+              </td> {% endcomment %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- end col -->
+</div>
+<!-- end row -->
+
+{% endblock body %}

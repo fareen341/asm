@@ -1,0 +1,4 @@
+{% comment %} <option value="">---------</option> {% endcomment %}
+{% for loc in location %}
+<option value="{{ loc.pk }}">{{loc.location}}</option>
+{% endfor %}

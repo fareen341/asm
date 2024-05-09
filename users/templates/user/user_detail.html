@@ -1,0 +1,223 @@
+{% extends 'dashboard/index.html' %}
+{% load crispy_forms_tags %}
+{% block title_add %}
+<!-- start page title -->
+<div class="row align-items-center">
+    <div class="col-sm-6">
+        <div class="page-title-box">
+            <h4 class="font-size-18"> Detail:  {{user.first_name | title}} {{user.last_name | title}} </h4>
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="javascript: void(0);">Employee</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'UserList' %}">Employee List</a></li>
+                <li class="breadcrumb-item"><a href="#">{{user.first_name}} {{user.last_name}}</a></li>
+                {% comment %} <li class="breadcrumb-item active">Edit {{hardware.name}} - {{hardware.barcode}}</li> {% endcomment %}
+            </ol>
+        </div>
+    </div>
+    <div class="col-sm-6">
+
+        
+        <button onclick="history.back()" type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Back</button>
+        
+        
+            <a href="{% url 'UserUpdate' user.pk %}">
+                <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Edit {{hardware.name | title}}</button>
+            {{hardware.name | title}}
+            </a>
+    
+{% comment %} {% if hardware.assigned_to == None %}
+        <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right" data-toggle="modal"
+            data-target="#myModal{{hardware.pk}}">Assign</button>
+           
+           {% else %}
+           <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right" data-toggle="modal"
+            data-target="#myModalreturn{{hardware.pk}}">Return in Stock</button>
+            {% comment %} <a href=" {% url 'HardwareReturn' hardware.pk %}">
+                  
+                <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Return in Stock</button>
+            </a>
+{% endif %} {% endcomment %}
+
+
+    </div>
+</div>
+<!-- end page title -->
+
+{% endblock title_add %}
+
+{% block body %}
+
+
+
+
+
+<table id="example" class="table table-striped" >
+
+    <thead>
+      <tr>
+        <th>Name</th>
+        {% comment %} <th>Brand</th> {% endcomment %}
+        <th>Category</th>
+       
+        <th>Barcode</th>
+        <th>Serial</th>
+        <th>Assigned To</th>
+        <th>Status</th>
+        <th>Vendor</th>
+        <th>Purchased On</th>
+        <th>Warranty Expiry</th>
+        <th>Warranty Status</th>
+        <th>TPM Expiry</th>
+        <th>Branch</th>
+        <th>Location</th>
+        <th>Cost</th>
+
+        {% comment %} <th>Action</th> {% endcomment %}
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for hardware in hardware %}
+      <tr>
+        <td><a href="{% url 'HardwareDetail' hardware.pk %}">{{hardware.name }}</a></td>
+        {% comment %} <td>{{hardware.brand }}</td> {% endcomment %}
+        <td>{{hardware.category }}</td>
+        
+        <td>{{hardware.barcode }}</td>
+        <td>{{hardware.serial }}</td>
+        <td>{{hardware.assigned_to }}</td>
+        <td>
+          <span class="badge badge-{% if hardware.status == "working" %}success {% else %}badge badge-danger 
+          {% endif %}"> {{hardware.status }}
+          </span>
+        </td>
+        <td>{{hardware.vendor }}</td>
+        <td>{{hardware.purchased_on }}</td>
+        <td>{{hardware.warranty_expiry }}</td>
+        <td>Valid till:{{hardware.warranty_expiry | timeuntil}}</td>
+        <td>{{hardware.tpm_expiry }}</td>
+
+        <td>{{hardware.branch }}</td>
+        <td>{{hardware.location }}</td>
+        <td>{{hardware.cost }}</td>
+
+        {% comment %} <td>
+
+          <button type="button" class="btn btn-sm btn-success">Edit</button>
+
+
+          <button type="button" class="btn btn-sm btn-info">View</button>
+          </a>
+        </td> {% endcomment %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+{% comment %} <div class="card">
+    <div class="card-body">
+        <h4 class="mt-0 header-title"></h4>
+
+
+        
+        <div class="col-12">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-6">Product Name:</dt>
+                        <dd class="col-sm-6">{{hardware.name}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-6">Asset Type:</dt>
+                        <dd class="col-sm-6">{{hardware.asset_type}}</dd>
+                    </dl>                    
+                    <dl class="row mb-0">
+                        <dt class="col-sm-6">Asset Category:</dt>
+                        <dd class="col-sm-6">{{hardware.category}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-6">Asset Barcode:</dt>
+                        <dd class="col-sm-6">{{hardware.barcode}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-6">Asset Serial No:</dt>
+                        <dd class="col-sm-6">{{hardware.serial}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-6">Product status:</dt>
+                        <dd class="col-sm-6">{{hardware.status}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-6">Product location:</dt>
+                        <dd class="col-sm-6">{{hardware.location}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-6">Product Assigned To:</dt>
+                        <dd class="col-sm-6">{{hardware.assigned_to}}</dd>
+                    </dl>
+
+                </div>
+
+
+                <div class="col-md-6">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-6">Vendor Name:</dt>
+                        <dd class="col-sm-6">{{hardware.vendor}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-6">Purchased On:</dt>
+                        <dd class="col-sm-6">{{hardware.purchased_on}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-6">Warranty Expiry Date:</dt>
+                        <dd class="col-sm-6">{{hardware.warranty_expiry}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-6">Product Cost:</dt>
+                        <dd class="col-sm-6">{{hardware.cost}}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+
+<hr>
+
+{% comment %} <h4 class="font-size-18"> Software Installed on: {{hardware.name | title}} - {{hardware.barcode}}</h4>
+<br>
+<div class="card">
+    <div class="card-body">
+        <table id="datatable" class="table table-bordered dt-responsive nowrap"
+            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Software Type</th>
+                    <th>Purchased On</th>
+                    <th>Expiry</th>
+
+
+
+                </tr>
+            </thead>
+
+
+            <tbody>
+                {% for software in software %}
+                <tr>
+                    <td>{{software.name}}</td>
+                    <td>{{software.softwaretype}}</td>
+                    <td>{{software.purchased_on}}</td>
+                    <td>{{software.expiry}}</td>
+
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table> {% endcomment %}
+
+        {% endblock body %}
